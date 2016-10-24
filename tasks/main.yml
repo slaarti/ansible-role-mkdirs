@@ -1,0 +1,15 @@
+---
+- name: "Remove directory or file {{ item.path }}"
+  file:
+    path: "{{ item.path }}"
+    state: absent
+  with_items: "{{ directories | selectattr('state', 'absent') | sort(attribute='path', reverse=True) }}"
+
+- name: "Create/manage directory {{ item.path }}"
+  file:
+    path: "{{ item.path }}"
+    state: directory
+    owner: "{{ item.owner | default(omit) }}"
+    group: "{{ item.group | default(omit) }}"
+    mode: "{{ item.mode | default(omit) }}"
+  with_items: "{{ directories | rejectattr('state', 'absent') | sort(attribute='path') }}"
