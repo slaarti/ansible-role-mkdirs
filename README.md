@@ -35,7 +35,10 @@ represented. The ones that do work are:
 
 *   `state`: **Optional.** *Ignored* unless set to `absent`, in which case
     the directory will be removed. No attempts will be made to ensure that
-    the directory is empty before trying to remove it.
+    the directory is empty before trying to remove it. Of course, there's
+    no real check that what's being removed is actually a directory, so
+    you could use this to remove files from a directory before removing
+    the directory, assuming you know all of the files that need removing.
 
 Example Playbook
 ----------------
